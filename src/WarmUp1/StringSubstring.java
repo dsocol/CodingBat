@@ -3,6 +3,100 @@ package WarmUp1;
 public class StringSubstring {
 
     /**
+     * Given a string and an index, return a string length 2 starting at the given index.
+     * If the index is too big or too small to define a string length 2, use the first 2 chars.
+     * The string length will be at least 2.
+         * twoChar("java", 0) → "ja"
+         * twoChar("java", 2) → "va"
+         * twoChar("java", 3) → "ja"
+     * **/
+    public String twoChar(String str, int index) {
+        int len = str.length();
+        if(index<=0 || index>=len-1){
+            return str.substring(0,2);
+        } else return str.substring(index,index+2);
+    }
+
+    /**
+     * Given a string and an int n, return a string made of the first and last n chars from the string.
+     * The string length will be at least n.
+         * nTwice("Hello", 2) → "Helo"
+         * * nTwice("Chocolate", 3) → "Choate"
+         * nTwice("Chocolate", 1) → "Ce"
+     **/
+    public String nTwice(String str, int n) {
+        int l = str.length();
+        String prefix = str.substring(0, n);
+        String suffix = str.substring(l-n);
+        StringBuilder stringBuilder = new StringBuilder();
+        return stringBuilder.append(prefix).append(suffix).toString();
+    }
+
+    /**
+     * Given a string, return the count of the number of times that a substring length 2 appears in the string and also
+     * as the last 2 chars of the string, so "hixxxhi" yields 1 (we won't count the end substring).
+         * last2("hixxhi") → 1
+         * last2("xaxxaxaxx") → 1
+         * last2("axxxaaxx") → 2
+     * **/
+    public int last2(String str) {
+        int n = str.length();
+        if(n<=2) return 0;
+        String sub = "";
+        String suf = str.substring(n-2,n);
+        System.out.println("Sufixul lui " + '"' + str + '"' +  " este: " + suf);
+        int contor = 0;
+        for (int i = 0; i < n-2; i++) {
+            sub = str.substring(i,i+2);
+            String var = "Subșir de lungime 2 extras  de la index: " + i + " până la index: " + (i+2) + ": " + sub;
+            if (!suf.equals(sub)){
+                System.out.println(var);
+            }else {
+                ++contor;
+                System.out.println(var + " --> Aici au fost egale! Incrementăm contorul: " + contor);
+            }
+
+        }
+        System.out.println("Returnăm conturul: " + contor);
+        return contor;
+    }
+
+    /**
+     * Given a non-empty string like "Code" return a string like "CCoCodCode".
+         * stringSplosion("Code") → "CCoCodCode"
+         * stringSplosion("abc") → "aababc"
+         * stringSplosion("ab") → "aab"
+     * **/
+    public String stringSplosion(String str) {
+        String result = "";
+        int n = str.length();
+        for (int i = 0; i < n; i++) {
+            result = result + str.substring(0, i+1);
+            System.out.println("Index from " + 0 + " to : " + (i+1) + " -> " + str.substring(0,i+1));
+        }
+        return result;
+    }
+
+
+    /**
+     *
+     * Given a string, return a new string made of every other char starting with the first, so "Hello" yields "Hlo".
+         * stringBits("Hello") → "Hlo"
+         * stringBits("Hi") → "H"
+         * stringBits("Heeololeo") → "Hello"
+     * **/
+    public String stringBits(String str) {
+        String result = "";
+        int n = str.length();
+        System.out.printf("Value of n is: %d ",n);
+        for (int i = 0; i < n; i+=2) {
+            result = result + str.charAt(i);
+        }
+        return result;
+    }
+
+
+    /**
      * Given a string, return true if the first instance of "x" in the string is immediately followed by another "x".
      * doubleX("axxbb") → true
      * doubleX("axaxax") → false
